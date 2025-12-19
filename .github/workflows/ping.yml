@@ -2,7 +2,7 @@ name: Keep Render Awake
 
 on:
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "*/10 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -12,4 +12,6 @@ jobs:
     steps:
       - name: Ping Render Server
         run: |
-          curl -s https://chatfusionx-api-v2-0.onrender.com/api/v1/serverStatus
+          curl -s "$RENDER_PING_URL"
+        env:
+          RENDER_PING_URL: ${{ secrets.RENDER_PING_URL }}
